@@ -43,8 +43,8 @@ class Search extends React.Component {
 	onSearchChange(event) {
 		const { keyCode, target } = event;
 		if (!isEmpty(target.value) && target.value !== this.state.searchedTerm && keyCode === 13) {
-			this.setState({ searchedTerm: target.value, currentPage: 1, searchMatch: "Movie" });
-			this.searchRequest(target.value, "Movie", 1);
+			this.setState({ searchedTerm: target.value, currentPage: 1, searchMatch: "Title" });
+			this.searchRequest(target.value, "Title", 1);
 		}
 		else if (this.verifySearchGender(target.value)) {
 			this.setState({ searchText: target.value, searchMatch: "Genre" });
@@ -55,7 +55,7 @@ class Search extends React.Component {
 	}
 
 	searchRequest(searchText, searchMatch, page) {
-		if (searchMatch === "Movie") {
+		if (searchMatch === "Title") {
 			this.props.searchMoviesByTitle(searchText, page);
 		}
 		else if (searchMatch === "Genre") {
@@ -94,7 +94,7 @@ class Search extends React.Component {
 								searchText !== "" && (searchMatch === "Genre" || searchMatch === "Year") ?
 									<div className="dropdown-search">
 										<ul>
-											<li onClick={(e) => this.searchRequest(searchText, "Movie", 1)}>
+											<li onClick={(e) => this.searchRequest(searchText, "Title", 1)}>
 												<i className="material-icons">search</i>
 												Buscar <strong>{searchText}</strong> por titulos de filmes
 											</li>
@@ -119,7 +119,7 @@ class Search extends React.Component {
 						</div>
 						{
 							movies.slice(((currentPage - 1) * itemsPerPage), (currentPage * itemsPerPage)).map((item) => {
-								return <SearchCard movieData={item} Genres={genres} key={item.id} />
+								return <SearchCard movieData={item} Genres={genres} key={item.id} searchRequest={this.searchRequest}/>
 							})
 						}
 						<div className="page-bottom">

@@ -9,6 +9,7 @@ const Genre = styled.label`
     padding: 4px 10px;
     margin-right: 6px;
     border: 2px solid #116193;
+    cursor: pointer;
 `
 
 

@@ -8,17 +8,16 @@ function* fetchMoviesByTitle(payload) {
   const response = yield call(repository.getMoviesByTitle, page, searchTerm);
   yield put({
     type: actions.SUCCESS_SEARCHED_MOVIES,
-    result: {searchTerm: searchTerm , response: response}
+    result: {searchTerm: searchTerm , response: response,  searchMatch: "Title"}
   });
 }
 
 function* fetchMoviesByGenre(payload) {
   const { page, searchTerm } = payload;
   const response = yield call(repository.getMoviesByGenre, page, searchTerm);
-  console.log(response);
   yield put({
     type: actions.SUCCESS_SEARCHED_MOVIES,
-    result: {searchTerm: searchTerm , response: response}
+    result: {searchTerm: searchTerm , response: response,  searchMatch: "Genre"}
   });
 }
 
@@ -27,7 +26,7 @@ function* fetchMoviesByYear(payload) {
   const response = yield call(repository.getMoviesByYear, page, searchTerm);
   yield put({
     type: actions.SUCCESS_SEARCHED_MOVIES,
-    result: {searchTerm: searchTerm , response: response}
+    result: {searchTerm: searchTerm , response: response, searchMatch: "Year"}
   });
 }
 

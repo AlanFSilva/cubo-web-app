@@ -6,10 +6,11 @@ class GenreContainer extends React.Component {
 
 	constructor(props) {
 		super(props);
-
+		this.searchForGenre =  this.searchForGenre.bind(this);
 	}
 
-	searchForGenre(genreId) {
+	searchForGenre(genre) {
+		this.props.searchRequest(genre, "Genre", 1);
 	}
 
 	convertToText(item) {
@@ -27,7 +28,7 @@ class GenreContainer extends React.Component {
 		return (
 			<div className="genre-container">
 				{
-					movieGenres.map((item) => { return <Genre>{this.convertToText(item)}</Genre> })
+					movieGenres.map((item) => { const name = this.convertToText(item); return <Genre onClick={(e) => this.searchForGenre(name)}>{name}</Genre>; })
 				}
 			</div>
 		);

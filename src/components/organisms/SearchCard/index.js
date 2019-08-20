@@ -51,7 +51,7 @@ class SearchCard extends React.Component {
 					</div>
 					<div className="card-body">
 						<Text>{overview}</Text>
-						<GenreContainer movieGenres={genre_ids} Genres={this.props.Genres}/>
+						<GenreContainer movieGenres={genre_ids} Genres={this.props.Genres} searchRequest={this.props.searchRequest}/>
 					</div>
 				</div>
 			</article>
