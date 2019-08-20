@@ -15,33 +15,18 @@ class App extends React.Component {
     super(props);
   }
 
-  componentWillMount() {
-
-  }
-
-  componentDidMount() {
-    this.setState({ pageState: 'LOADED' });
-  }
-
   render() {
-    console.log(this);
-    if (this.state.pageState == 'LOADED') {
-      return (
-        <Provider store={store}>
-          <Router history={history}>
-            <div>
-              <Route exact path="/" component={Search} />
-              <Route path="/search(/:type/:searchTerm/:page)" component={Search} />
-              <Route path="/movie-detail/:movieId" component={MovieDetails} />
-            </div>
-          </Router>
-        </Provider>
-      );
-    }
-    else {
-      return <div>Loading...</div>
-    }
-
+    return (
+      <Provider store={store}>
+        <Router history={history}>
+          <div>
+            <Route exact path="/" component={Search} />
+            <Route path="/search(/:type/:searchTerm/:page)" component={Search} />
+            <Route path="/movie-detail/:movieId" component={MovieDetails} />
+          </div>
+        </Router>
+      </Provider>
+    );
   }
 }
 

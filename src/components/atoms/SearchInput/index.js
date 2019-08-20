@@ -1,13 +1,24 @@
+import React from 'react'
 import styled from 'styled-components'
 
-const NavButton = styled.button`
-	font-size: 15px;
-	background-color: #fff;
-	color: #00e8e4;
-    border-radius: 50px 50px 50px 50px;
-    color: #116193;
-    padding: 4px 10px;
-    margin-right: 6px;
-    border: 2px solid #116193;
+const SearchStyle = styled.input`
+    font-size: 13px;
+    width: 100%;
+    background-color: #ebebeb;
+    color: #9bb7c8;
+    border-radius: 50px;
+    padding: 10px 20px;
+    margin: 30px 0 10px 0;
+    border: none;
+    box-sizing: border-box;
+    ::placeholder { 
+        color: #9bb7c8;
+    } 
 `
-export default NavButton
+
+const SearchInput = ({ placeholder, onKeyUp }) => {
+
+    return <SearchStyle type="text" placeholder={placeholder} onKeyUp={(e) => onKeyUp(e)}></SearchStyle>
+  }
+
+  export default SearchInput

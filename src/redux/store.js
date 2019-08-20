@@ -3,7 +3,7 @@ import createHistory from 'history/createBrowserHistory';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
-import reducers from './movies/reducer';
+import Movies from './movies/reducer';
 
 import { all } from 'redux-saga/effects';
 import moviesSaga from './movies/saga';
@@ -15,7 +15,7 @@ const middlewares = [thunk, sagaMiddleware, routeMiddleware];
 
 const store = createStore(
   combineReducers({
-    ...reducers,
+    Movies,
     router: routerReducer
   }),
   compose(applyMiddleware(...middlewares))

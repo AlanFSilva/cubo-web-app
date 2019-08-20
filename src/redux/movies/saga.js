@@ -3,56 +3,47 @@ import actions from "./actions";
 
 import repository from "../tmdb"
 
-/*const mapDbResponseToViewModel = (result) => {
-  return Object.keys(result).reduce(
-    (feedsAcc, key) => { 
-      const feedIds = Object.keys(result[key])
-      const feedsWithIds = Object.values(result[key]).map((feed, i) => ({id: feedIds[i], ...feed, orderId: key}))
-      return [...feedsAcc, ...feedsWithIds ]
-    }, []
-  );
-} */
-
 function* fetchMoviesByTitle(payload) {
   const { page, searchTerm } = payload;
-  const result = yield call(repository.getAll, page, searchTerm);
+  const response = yield call(repository.getMoviesByTitle, page, searchTerm);
+  console.log(response);
   yield put({
     type: actions.SUCCESS_SEARCHED_MOVIES,
-    result
+    result: {searchTerm: searchTerm , response: response}
   });
 }
 
 function* fetchMoviesByGenre(payload) {
   const { page, searchTerm } = payload;
-  const result = yield call(repository.getAll, page, searchTerm);
+  const response = yield call(repository.getMoviesByGenre, page, searchTerm);
   yield put({
     type: actions.SUCCESS_SEARCHED_MOVIES,
-    result
+    response
   });
 }
 
 function* fetchMoviesByYear(payload) {
   const { page, searchTerm } = payload;
-  const result = yield call(repository.getAll, page, searchTerm);
+  const response = yield call(repository.getMoviesByYear, page, searchTerm);
   yield put({
     type: actions.SUCCESS_SEARCHED_MOVIES,
-    result
+    response
   });
 }
 
 function* getMovieDetails(payload) {
   const { movieId } = payload;
-  const result = yield call(repository.getAll, movieId);
+  const movieDetail = yield call(repository.getMoviesDetail, movieId);
   yield put({
     type: actions.SUCCESS_GOT_MOVIE_DETAIL,
-    result
+    movieDetail
   });
 }
 
-function* getMoviegGenres() {
-  const result = yield call(repository.getAll);
+function* getMovieGenres() {
+  const result = yield call(repository.getMovieGenres);
   yield put({
-    type: actions.SUCCESS_SEARCHED_MOVIES,
+    type: actions.SUCCESS_GOT_GENRES,
     result
   });
 }
@@ -63,6 +54,6 @@ export default function* moviesSaga() {
     takeEvery(actions.SEARCH_MOVIE_BY_YEAR, fetchMoviesByGenre),
     takeEvery(actions.SEARCH_MOVIE_BY_GENRE, fetchMoviesByYear),
     takeEvery(actions.GET_MOVIE_DETAILS, getMovieDetails),
-    takeEvery(actions.GET_MOVIE_GENRES, getMoviegGenres),
+    takeEvery(actions.FETCH_MOVIE_GENRES, getMovieGenres),
   ]);
 }

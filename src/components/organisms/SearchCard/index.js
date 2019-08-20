@@ -7,6 +7,8 @@ import Text from '../../atoms/Text'
 import GenreContainer from '../../molecules/GenreContainer'
 import { history } from '../../../redux/store';
 
+const ImageRootPath = "http://image.tmdb.org/t/p/w342/";
+
 class SearchCard extends React.Component {
 
 	state = {
@@ -23,8 +25,6 @@ class SearchCard extends React.Component {
 	}
 
 	navigateToMovieDetail(movieId) {
-		console.log(this);
-		console.log(history);
 		history.push(`/movie-detail/${movieId}`);
 	}
 
@@ -33,7 +33,11 @@ class SearchCard extends React.Component {
 		return (
 			<article className="search-card-container">
 				<div className="card-side-image">
-					<img onClick={(e) => this.navigateToMovieDetail(id)} src={poster_path} />
+					{poster_path != null ?
+					<img onClick={(e) => this.navigateToMovieDetail(id)} src={ImageRootPath+poster_path} />
+					:
+					<div className="no-poster"><i class="material-icons">image</i></div>
+					}
 				</div>
 				<div className="card-main">
 					<div className="card-header">
@@ -47,7 +51,7 @@ class SearchCard extends React.Component {
 					</div>
 					<div className="card-body">
 						<Text>{overview}</Text>
-						<GenreContainer movieGenres={genre_ids} />
+						<GenreContainer movieGenres={genre_ids} Genres={this.props.Genres}/>
 					</div>
 				</div>
 			</article>
