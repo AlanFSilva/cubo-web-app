@@ -14,6 +14,10 @@ const SearchStyle = styled.input`
     ::placeholder { 
         color: #9bb7c8;
     } 
+
+    :focus {
+		outline: 0;
+	}
 `
 
 const SearchInput = ({ placeholder, onKeyUp }) => {

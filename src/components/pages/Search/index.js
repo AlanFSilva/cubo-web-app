@@ -21,6 +21,7 @@ class Search extends React.Component {
 	constructor(props) {
 		super(props);
 		this.onSearchChange = this.onSearchChange.bind(this);
+		this.navigateToPage =this.navigateToPage.bind(this);
 	}
 
 	componentDidMount() {
@@ -40,6 +41,15 @@ class Search extends React.Component {
 		}
 	}
 
+	navigateToPage(page){
+		const { genres, isPageLoading, movies, totalMovies, previousSearched } = this.props;
+		this.setState({ currentPage : page});
+		if(((page + 2) *5) >=  movies.length && movies.length < totalMovies){
+			let currentPage = Math.floor(movies.length / 20);
+			this.props.searchMoviesByTitle(previousSearched, (currentPage +1));
+		}
+	}
+
 	render() {
 		const { genres, isPageLoading, movies, totalMovies } = this.props;
 		const { currentPage } = this.state;
@@ -53,13 +63,13 @@ class Search extends React.Component {
 						<SearchInput placeholder="Busque um filme por título, ano ou gênero..." onKeyUp={this.onSearchChange} />
 						{
 							movies.slice(((currentPage - 1) * itemsPerPage), (currentPage * itemsPerPage)).map((item) => {
-								return <SearchCard movieData={item} Genres={genres} />
+								return <SearchCard movieData={item} Genres={genres} key={item.id}/>
 							})
 						}
 						<div className="page-bottom">
 							{
-								movies.length > 5 ?
-									<FooterNav currentPage={currentPage} totalMovies={totalMovies}/>
+								movies.length > 0 ?
+									<FooterNav currentPage={currentPage} totalMovies={totalMovies} itemsPerPage={itemsPerPage} changePage={this.navigateToPage}/>
 									:
 									null
 							}
@@ -73,13 +83,14 @@ class Search extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	const { genres, movies, isPageLoading, totalMovies } = state.Movies;
+	const { genres, movies, isPageLoading, totalMovies, previousSearched } = state.Movies;
 	console.log(movies);
 	return {
 		genres: genres,
 		movies: movies,
 		isPageLoading: isPageLoading,
-		totalMovies: totalMovies
+		totalMovies: totalMovies,
+		previousSearched: previousSearched
 	}
 }
 

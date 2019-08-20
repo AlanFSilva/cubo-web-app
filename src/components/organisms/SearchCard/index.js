@@ -7,7 +7,7 @@ import Text from '../../atoms/Text'
 import GenreContainer from '../../molecules/GenreContainer'
 import { history } from '../../../redux/store';
 
-const ImageRootPath = "http://image.tmdb.org/t/p/w342/";
+const ImageRootPath = "http://image.tmdb.org/t/p/w185/";
 
 class SearchCard extends React.Component {
 
