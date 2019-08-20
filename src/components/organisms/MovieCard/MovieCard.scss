@@ -1,0 +1,56 @@
+.movie-detail-card{
+	background: #ebebeb;
+	display: flex;
+    margin: 30px 0;
+    flex-direction: column;
+
+	.card-header{
+		display: flex;
+		width: 100%;
+        flex-direction: row;
+        background: #e6e6e6;
+        justify-content: space-between;
+        align-items: center;
+
+			label{
+                font-size: 20px !important;
+                padding-right: 20px;
+            }
+            
+			h1{
+				color:#116193;
+                padding-left: 40px;
+                font-weight: 600 !important;
+			}
+	}
+
+    .card-body{
+        display: flex;
+        flex-direction: row;
+
+        .card-side-image{ 
+            display: flex;
+            img{
+                height: 80vh;
+                width: auto;
+                cursor: pointer;
+            }
+        }
+
+        .info-main{
+            padding: 20px  20px 0px  40px ;
+        
+            .info-footer{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+
+                .score-wraper{
+                    padding:0 20px;
+                    width: fit-content;
+                }
+            }
+        }
+    }
+}

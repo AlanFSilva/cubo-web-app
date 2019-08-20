@@ -1,0 +1,44 @@
+.search-card-container{
+	background: #ebebeb;
+	display: flex;
+	margin: 30px 0;
+
+	.card-header{
+		display: flex;
+		width: 100%;
+		flex-direction: column;
+
+		.header-detail{
+			label{
+				padding-left: 100px;
+			}
+			h1{
+				background: #116193;
+				color:#00e8e4;
+				padding-left: 100px;
+				cursor: pointer;
+			}
+		}
+
+		.score-wraper{
+			padding: 20px;
+			width: fit-content;
+			position: absolute;
+			margin-top: 10px;
+		}
+	}
+
+	.card-side-image{ 
+		display: flex;
+		img{
+			height: 400px;
+			width: auto;
+			cursor: pointer;
+		}
+	}
+
+	.card-body{
+		padding: 20px;
+		width: 90%;
+	}
+}

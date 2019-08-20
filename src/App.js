@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Router, Route } from "react-router";
+import { Provider } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Search from './components/pages/Search'
+import PropTypes from 'prop-types';
+import MovieDetails from './components/pages/MovieDetails'
+import { store, history } from './redux/store';
+
+class App extends React.Component {
+  state = {
+    pageState: 'LOADING'
+  }
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+
+  }
+
+  componentDidMount() {
+    this.setState({ pageState: 'LOADED' });
+  }
+
+  render() {
+    console.log(this);
+    if (this.state.pageState == 'LOADED') {
+      return (
+        <Provider store={store}>
+          <Router history={history}>
+            <div>
+              <Route exact path="/" component={Search} />
+              <Route path="/search(/:type/:searchTerm/:page)" component={Search} />
+              <Route path="/movie-detail/:movieId" component={MovieDetails} />
+            </div>
+          </Router>
+        </Provider>
+      );
+    }
+    else {
+      return <div>Loading...</div>
+    }
+
+  }
 }
+
+App.contextTypes = {
+  router: PropTypes.object
+};
 
 export default App;

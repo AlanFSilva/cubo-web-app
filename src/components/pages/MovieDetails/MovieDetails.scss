@@ -1,0 +1,11 @@
+.movie-detail-container{
+    max-width: 1300px;
+    width: 95vw;
+    margin: auto;
+
+    .video-wraper{
+        #videoPlayer{
+            width: 100%;
+        }
+    }
+}

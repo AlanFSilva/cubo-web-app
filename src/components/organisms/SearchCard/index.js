@@ -1,0 +1,58 @@
+import React from 'react'
+import './SearchCard.scss'
+import Score from '../../atoms/Score'
+import Title from '../../atoms/Title'
+import DateLabel from '../../atoms/DateLabel'
+import Text from '../../atoms/Text'
+import GenreContainer from '../../molecules/GenreContainer'
+import { history } from '../../../redux/store';
+
+class SearchCard extends React.Component {
+
+	state = {
+
+	}
+
+	constructor(props) {
+		super(props);
+		this.navigateToMovieDetail = this.navigateToMovieDetail.bind(this);
+	}
+
+	componentWillMount() {
+
+	}
+
+	navigateToMovieDetail(movieId) {
+		console.log(this);
+		console.log(history);
+		history.push(`/movie-detail/${movieId}`);
+	}
+
+	render() {
+		const { vote_average, id, genre_ids, overview, title, release_date, poster_path } = this.props.movieData;
+		return (
+			<article className="search-card-container">
+				<div className="card-side-image">
+					<img onClick={(e) => this.navigateToMovieDetail(id)} src={poster_path} />
+				</div>
+				<div className="card-main">
+					<div className="card-header">
+						<div className="header-detail">
+							<Title onClick={(e) => this.navigateToMovieDetail(id)}>{title}</Title>
+							<DateLabel dateTime={release_date} />
+						</div>
+						<div className="score-wraper">
+							<Score movieScore={vote_average} />
+						</div>
+					</div>
+					<div className="card-body">
+						<Text>{overview}</Text>
+						<GenreContainer movieGenres={genre_ids} />
+					</div>
+				</div>
+			</article>
+		);
+	}
+}
+
+export default SearchCard
