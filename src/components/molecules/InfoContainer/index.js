@@ -6,19 +6,6 @@ import Text from '../../atoms/Text'
 
 class InfoContainer extends React.Component {
 
-	state = {
-
-	}
-
-	constructor(props) {
-		super(props);
-
-	}
-
-	componentWillMount() {
-
-	}
-
 	convertDuration(runtime) {
 		let hour = Math.floor(runtime / 60);
 		let minutes = runtime - (hour * 60);

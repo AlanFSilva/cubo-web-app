@@ -7,7 +7,7 @@ import Text from '../../atoms/Text'
 import GenreContainer from '../../molecules/GenreContainer'
 import { history } from '../../../redux/store';
 
-const ImageRootPath = "http://image.tmdb.org/t/p/w185/";
+const ImageRootPath = "http://image.tmdb.org/t/p/w342/";
 
 class SearchCard extends React.Component {
 
@@ -34,7 +34,7 @@ class SearchCard extends React.Component {
 			<article className="search-card-container">
 				<div className="card-side-image">
 					{poster_path != null ?
-					<img onClick={(e) => this.navigateToMovieDetail(id)} src={ImageRootPath+poster_path} />
+					<img onClick={(e) => this.navigateToMovieDetail(id)} src={ImageRootPath+poster_path} alt={title + " poster"}/>
 					:
 					<div className="no-poster"><i class="material-icons">image</i></div>
 					}

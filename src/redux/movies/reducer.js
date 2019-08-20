@@ -1,10 +1,10 @@
 import actions from "./actions";
 
 const initState = {
-  movies: new Array(),
+  movies: [],
   totalMovies: 0,
   movieDetail: null,
-  genres: new Array(),
+  genres: [],
   isLoading: true,
   isPageLoading: true,
   previousSearched: '',

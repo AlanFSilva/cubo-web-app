@@ -27,6 +27,7 @@
     .card-body{
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
 
         .card-side-image{ 
             display: flex;
@@ -39,6 +40,8 @@
 
         .info-main{
             padding: 20px  20px 0px  40px ;
+            width: 100%;
+            box-sizing: border-box;
         
             .info-footer{
                 display: flex;

@@ -1,4 +1,4 @@
-import { takeEvery, fork, all, put, call, take } from "redux-saga/effects";
+import { takeEvery, all, put, call } from "redux-saga/effects";
 import actions from "./actions";
 
 import repository from "../tmdb"
@@ -6,7 +6,6 @@ import repository from "../tmdb"
 function* fetchMoviesByTitle(payload) {
   const { page, searchTerm } = payload;
   const response = yield call(repository.getMoviesByTitle, page, searchTerm);
-  console.log(response);
   yield put({
     type: actions.SUCCESS_SEARCHED_MOVIES,
     result: {searchTerm: searchTerm , response: response}
@@ -33,7 +32,7 @@ function* fetchMoviesByYear(payload) {
 
 function* getMovieDetails(payload) {
   const { movieId } = payload;
-  const movieDetail = yield call(repository.getMoviesDetail, movieId);
+  const movieDetail = yield call(repository.getMovieDetails, movieId);
   yield put({
     type: actions.SUCCESS_GOT_MOVIE_DETAIL,
     movieDetail

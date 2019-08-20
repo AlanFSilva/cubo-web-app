@@ -35,14 +35,14 @@ class Search extends React.Component {
 
 	onSearchChange(event) {
 		const { keyCode, target } = event;
-		if (!isEmpty(target.value) && target.value != this.state.searchedTerm && keyCode == 13) {
-			this.setState({ searchedTerm: target.value })
+		if (!isEmpty(target.value) && target.value !== this.state.searchedTerm && keyCode === 13) {
+			this.setState({ searchedTerm: target.value, currentPage:1 })
 			this.props.searchMoviesByTitle(target.value, 1);
 		}
 	}
 
 	navigateToPage(page){
-		const { genres, isPageLoading, movies, totalMovies, previousSearched } = this.props;
+		const { movies, totalMovies, previousSearched } = this.props;
 		this.setState({ currentPage : page});
 		if(((page + 2) *5) >=  movies.length && movies.length < totalMovies){
 			let currentPage = Math.floor(movies.length / 20);
@@ -84,7 +84,6 @@ class Search extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
 	const { genres, movies, isPageLoading, totalMovies, previousSearched } = state.Movies;
-	console.log(movies);
 	return {
 		genres: genres,
 		movies: movies,

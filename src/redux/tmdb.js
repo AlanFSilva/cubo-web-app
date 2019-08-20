@@ -9,7 +9,7 @@ export default ({
   getMoviesByTitle: async (page, searchTerm) => {
     return axios({
       method: "GET",
-      url: `${BaseUrl}search/movie?api_key==${apiKey}&language=${langauge}&query=${searchTerm}&page=${page}&include_adult=false`
+      url: `${BaseUrl}search/movie?api_key=${apiKey}&language=${langauge}&query=${searchTerm}&page=${page}&include_adult=false`
     }).then(response => {return response.data});
   },
 
@@ -22,7 +22,10 @@ export default ({
   },
 
   getMovieDetails: async (movieId) => {
-
+    return axios({
+      method: "GET",
+      url: `${BaseUrl}movie/${movieId}?api_key=${apiKey}&language=${langauge}&append_to_response=videos`
+    }).then(response => {return response.data});
   },
 
   getMovieGenres: async () => {
