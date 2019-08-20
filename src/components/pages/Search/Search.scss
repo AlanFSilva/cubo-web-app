@@ -1,5 +1,34 @@
-.search-container{
+.search-page-container{
     max-width: 1300px;
     width: 90vw;
     margin: auto;
+
+    .search-wraper{
+        .dropdown-search{
+            width: 100%;
+            margin-top: -15px;
+            background-color: #f8f8f8;
+
+            ul{
+                margin: 0;
+                padding: 0;
+                padding-top: 20px;
+                list-style-type: none;
+
+                li{
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    height: 40px;
+                    border-bottom: 1px solid #d9d9d9;
+
+                    strong, i{
+                        margin: 0 5px;
+                    }
+                }
+            }
+        }
+    }
+
 }

@@ -31,7 +31,7 @@ class App extends React.Component {
 }
 
 App.contextTypes = {
-  router: PropTypes.object
+  router: PropTypes.func
 };
 
 export default App;

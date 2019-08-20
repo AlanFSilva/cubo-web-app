@@ -45,7 +45,7 @@ class MovieDetails extends React.Component {
 		return (
 			<div className="page-wraper">
 				{
-					isLoading && movieDetail === null ?
+					isLoading || movieDetail === null ?
 						<span>Loading...</span>
 						:
 						<div className="movie-detail-container">

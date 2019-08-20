@@ -8,7 +8,7 @@ const SearchStyle = styled.input`
     color: #9bb7c8;
     border-radius: 50px;
     padding: 10px 20px;
-    margin: 30px 0 10px 0;
+    margin: 30px 0 0 0;
     border: none;
     box-sizing: border-box;
     ::placeholder { 

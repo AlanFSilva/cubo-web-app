@@ -8,7 +8,7 @@ import { isEmpty } from '../../../util'
 
 import './Search.scss'
 
-const { GetMovieGenres, FetchMovieGenres, searchMoviesByTitle } = movieActions;
+const { GetMovieGenres, FetchMovieGenres, searchMoviesByTitle, searchMoviesByGenre, searchMoviesByYear  } = movieActions;
 const itemsPerPage = 5;
 
 class Search extends React.Component {
@@ -16,12 +16,15 @@ class Search extends React.Component {
 	state = {
 		currentPage: 1,
 		searchedTerm: '',
+		searchText: '',
+		searchMatch: '',
 	}
 
 	constructor(props) {
 		super(props);
 		this.onSearchChange = this.onSearchChange.bind(this);
-		this.navigateToPage =this.navigateToPage.bind(this);
+		this.searchRequest = this.searchRequest.bind(this);
+		this.navigateToPage = this.navigateToPage.bind(this);
 	}
 
 	componentDidMount() {
@@ -33,43 +36,96 @@ class Search extends React.Component {
 		}
 	}
 
+	verifySearchGender(text){
+		return this.props.genres.find(item => item.name.toLowerCase() === text.toLowerCase())
+	}
+
 	onSearchChange(event) {
 		const { keyCode, target } = event;
 		if (!isEmpty(target.value) && target.value !== this.state.searchedTerm && keyCode === 13) {
-			this.setState({ searchedTerm: target.value, currentPage:1 })
-			this.props.searchMoviesByTitle(target.value, 1);
+			this.setState({ searchedTerm: target.value, currentPage: 1, searchMatch: "Movie" });
+			this.searchRequest(target.value, "Movie", 1);
+		}
+		else if (this.verifySearchGender(target.value)) {
+			this.setState({ searchText: target.value, searchMatch: "Genre" });
+		}
+		else if (target.value >= 1900 && target.value <= 2050) {
+			this.setState({ searchText: target.value, searchMatch: "Year" });
 		}
 	}
 
-	navigateToPage(page){
+	searchRequest(searchText, searchMatch, page) {
+		if (searchMatch === "Movie") {
+			this.props.searchMoviesByTitle(searchText, page);
+		}
+		else if (searchMatch === "Genre") {
+			const genreId = this.verifySearchGender(searchText).id;
+			this.props.searchMoviesByGenre(genreId, page);
+		}
+		else if (searchMatch === "Year") {
+			this.props.searchMoviesByYear(searchText, page);
+		}
+		this.setState({ searchText: "", searchMatch: searchMatch });
+
+	}
+
+	navigateToPage(page) {
 		const { movies, totalMovies, previousSearched } = this.props;
-		this.setState({ currentPage : page});
-		if(((page + 2) *5) >=  movies.length && movies.length < totalMovies){
+		this.setState({ currentPage: page });
+		if (((page + 2) * 5) >= movies.length && movies.length < totalMovies) {
 			let currentPage = Math.floor(movies.length / 20);
-			this.props.searchMoviesByTitle(previousSearched, (currentPage +1));
+			this.searchRequest(previousSearched, this.state.searchMatch, (currentPage + 1));
 		}
 	}
 
 	render() {
 		const { genres, isPageLoading, movies, totalMovies } = this.props;
-		const { currentPage } = this.state;
+		const { currentPage, searchText, searchMatch } = this.state;
 
 		return (
 			<div className="page-wraper">
 				{isPageLoading ?
 					<span>Loading...</span>
 					:
-					<div className="search-container">
-						<SearchInput placeholder="Busque um filme por título, ano ou gênero..." onKeyUp={this.onSearchChange} />
+					<div className="search-page-container">
+						<div className="search-wraper">
+							<SearchInput placeholder="Busque um filme por título, ano ou gênero..." onKeyUp={this.onSearchChange} />
+							{
+								searchText !== "" && (searchMatch === "Genre" || searchMatch === "Year") ?
+									<div className="dropdown-search">
+										<ul>
+											<li onClick={(e) => this.searchRequest(searchText, "Movie", 1)}>
+												<i className="material-icons">search</i>
+												Buscar <strong>{searchText}</strong> por titulos de filmes
+											</li>
+											{
+												searchMatch === "Genre" ?
+													<li onClick={(e) => this.searchRequest(searchText, searchMatch, 1)}>
+														<i className="material-icons">search</i>
+														Buscar <strong>{searchText}</strong> por gêneros de filmes
+													</li>
+												:
+												searchMatch === "Year" ?
+													<li onClick={(e) => this.searchRequest(searchText, searchMatch, 1)}>
+														<i className="material-icons">search</i>
+														Buscar <strong>{searchText}</strong> por ano de lançamento dos filmes
+													</li>
+												:null
+											}
+										</ul>
+									</div>
+									: null
+							}
+						</div>
 						{
 							movies.slice(((currentPage - 1) * itemsPerPage), (currentPage * itemsPerPage)).map((item) => {
-								return <SearchCard movieData={item} Genres={genres} key={item.id}/>
+								return <SearchCard movieData={item} Genres={genres} key={item.id} />
 							})
 						}
 						<div className="page-bottom">
 							{
 								movies.length > 0 ?
-									<FooterNav currentPage={currentPage} totalMovies={totalMovies} itemsPerPage={itemsPerPage} changePage={this.navigateToPage}/>
+									<FooterNav currentPage={currentPage} totalMovies={totalMovies} itemsPerPage={itemsPerPage} changePage={this.navigateToPage} />
 									:
 									null
 							}
@@ -93,4 +149,4 @@ const mapStateToProps = (state, ownProps) => {
 	}
 }
 
-export default connect(mapStateToProps, { FetchMovieGenres, GetMovieGenres, searchMoviesByTitle })(Search);
+export default connect(mapStateToProps, { FetchMovieGenres, GetMovieGenres, searchMoviesByTitle ,searchMoviesByGenre, searchMoviesByYear })(Search);

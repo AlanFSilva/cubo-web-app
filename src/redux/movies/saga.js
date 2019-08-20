@@ -15,9 +15,10 @@ function* fetchMoviesByTitle(payload) {
 function* fetchMoviesByGenre(payload) {
   const { page, searchTerm } = payload;
   const response = yield call(repository.getMoviesByGenre, page, searchTerm);
+  console.log(response);
   yield put({
     type: actions.SUCCESS_SEARCHED_MOVIES,
-    response
+    result: {searchTerm: searchTerm , response: response}
   });
 }
 
@@ -26,7 +27,7 @@ function* fetchMoviesByYear(payload) {
   const response = yield call(repository.getMoviesByYear, page, searchTerm);
   yield put({
     type: actions.SUCCESS_SEARCHED_MOVIES,
-    response
+    result: {searchTerm: searchTerm , response: response}
   });
 }
 
@@ -50,8 +51,8 @@ function* getMovieGenres() {
 export default function* moviesSaga() {
   yield all([
     takeEvery(actions.SEARCH_MOVIE_BY_TITLE, fetchMoviesByTitle),
-    takeEvery(actions.SEARCH_MOVIE_BY_YEAR, fetchMoviesByGenre),
-    takeEvery(actions.SEARCH_MOVIE_BY_GENRE, fetchMoviesByYear),
+    takeEvery(actions.SEARCH_MOVIE_BY_YEAR, fetchMoviesByYear),
+    takeEvery(actions.SEARCH_MOVIE_BY_GENRE, fetchMoviesByGenre),
     takeEvery(actions.GET_MOVIE_DETAILS, getMovieDetails),
     takeEvery(actions.FETCH_MOVIE_GENRES, getMovieGenres),
   ]);
