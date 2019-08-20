@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import MovieCard from '../../organisms/MovieCard'
 import movieActions from '../../../redux/movies/actions'
 import { isEmpty } from '../../../util'
-import { history } from '../../../redux/store';
 
 import './MovieDetails.scss'
 
@@ -11,20 +10,11 @@ const { GetMovieDetails } = movieActions;
 
 class MovieDetails extends React.Component {
 
-	constructor(props) {
-		super(props);
-		this.backPage = this.backPage.bind(this);
-	}
-
 	componentDidMount() {
 		const movieId = this.props.match !== undefined ? this.props.match.params.movieId : null;
 		if (!isEmpty(movieId)) {
 			this.props.GetMovieDetails(movieId);
 		}
-	}
-
-	backPage() {
-		history.goBack();
 	}
 
 	getVideoUrl(videos) {

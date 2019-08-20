@@ -1,11 +1,13 @@
 import React from 'react'
 import { Router, Route } from "react-router";
 import { Provider } from 'react-redux';
+import PropTypes from 'prop-types';
+import { store, history } from './redux/store';
 
 import Search from './components/pages/Search'
-import PropTypes from 'prop-types';
+import Header from './components/molecules/Header'
 import MovieDetails from './components/pages/MovieDetails'
-import { store, history } from './redux/store';
+
 
 class App extends React.Component {
   state = {
@@ -20,6 +22,7 @@ class App extends React.Component {
       <Provider store={store}>
         <Router history={history}>
           <div>
+            <Header>Movies</Header>
             <Route exact path="/" component={Search} />
             <Route path="/search(/:type/:searchTerm/:page)" component={Search} />
             <Route path="/movie-detail/:movieId" component={MovieDetails} />
