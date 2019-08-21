@@ -19,11 +19,11 @@ class MovieDetails extends React.Component {
 
 	getVideoUrl(videos) {
 		if (videos[0].site === "YouTube") {
-			return <iframe id="videoPlayer" type="text/html" width="1920" height="1080"
+			return <iframe id="videoPlayer" type="text/html" 
 				src={"http://www.youtube.com/embed/" + videos[0].key}
 				frameborder="0" title="Youtube Video" />
 		} else {
-			return <iframe id="videoPlayer" width="1920" height="1080" frameborder="0"
+			return <iframe id="videoPlayer" frameborder="0"
 				src={"https://player.vimeo.com/video/" + videos[0].key}
 				webkitallowfullscreen mozallowfullscreen allowfullscreen title="Vimeo Video" />
 		}

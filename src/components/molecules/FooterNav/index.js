@@ -4,8 +4,7 @@ import styled from 'styled-components'
 
 const NavDiv = styled.div`
 	display: flex;
-	justify-content: space-between;
-	width: 180px;
+	width: fit-content;
 	margin: auto;
 	margin-bottom: 50px;
 `

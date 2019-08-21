@@ -1,11 +1,28 @@
 .movie-detail-container{
-    max-width: 1300px;
-    width: 95vw;
-    margin: auto;
+	max-width: 1300px;
+	width: 94%;
+	margin: auto;
+	padding-left: 10px;
+	margin-bottom: 30px;
 
-    .video-wraper{
-        #videoPlayer{
-            width: 100%;
-        }
-    }
+	.video-wraper{
+		position:relative;
+		padding-bottom:56.25%;
+		padding-top:30px;
+		height:0;
+		overflow:hidden;
+	
+			#videoPlayer{
+				position:absolute;
+				top:0;
+				left:0;
+				width:100%;
+				height:100%;
+			}
+	}
+
+	@media (max-width : 800px) {
+		padding-left: 25px;
+		width: 93%;
+	}
 }

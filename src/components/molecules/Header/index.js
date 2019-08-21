@@ -22,6 +22,7 @@ const HeaderDiv = styled.div`
     background: transparent;
     position: absolute;
     margin: 0 20px;
+    padding-left: 20px;
     left: 0;
     cursor: pointer;
     color: #00e8e4;

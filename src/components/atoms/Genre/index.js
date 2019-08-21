@@ -7,9 +7,10 @@ const Genre = styled.label`
     border-radius: 50px 50px 50px 50px;
     color: #116193;
     padding: 4px 10px;
-    margin-right: 6px;
+    margin: 0 6px 6px 0;
     border: 2px solid #116193;
     cursor: pointer;
+    width: fit-content;
 `
 
 

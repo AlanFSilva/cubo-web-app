@@ -11,6 +11,7 @@
         background: #e6e6e6;
         justify-content: space-between;
         align-items: center;
+        padding: 10px 0;
 
 			label{
                 font-size: 20px !important;
@@ -21,6 +22,7 @@
 				color:#116193;
                 padding-left: 40px;
                 font-weight: 600 !important;
+                padding-top: 0 !important;
 			}
 	}
 
@@ -52,6 +54,75 @@
                 .score-wraper{
                     padding:0 20px;
                     width: fit-content;
+                }
+            }
+        }
+    }
+
+    @media (max-width : 1000px) and (min-width : 850px) {
+        .card-body{
+            padding-bottom: 10px;
+
+            .card-side-image{ 
+                img{
+                    height: 70vh;
+                }
+            }
+
+            .info-main{
+                padding: 10px ;
+                
+                .info-container-element{
+                    margin-bottom: 5px;
+                }
+
+                .info-footer{
+                    .genre-container{
+                        flex-direction: column;
+                    }
+                }
+            }
+        }
+    }
+
+    @media (max-width : 850px) {
+        .card-body{
+            flex-direction: column-reverse;
+            
+            .card-side-image{ 
+                img{
+                    height: auto;
+                    width: 100%;
+                }
+            }
+
+            .info-main{
+                padding: 10px ;
+                position: relative;
+                
+                .info-container-element{
+                    margin-bottom: 5px;
+                    width: 50%;
+                }
+
+                .info-footer{
+                    position: absolute;
+                    right: 0;
+                    top: 40%;
+                    width: 45%;
+                    flex-direction: column;
+
+                    .genre-container{
+                        flex-direction: row;
+                    }
+
+                    .score-wraper{
+                        position: absolute;
+                        padding:20px;
+                        right: 0;
+                        top: 200px;
+                        width: fit-content;
+                    }
                 }
             }
         }

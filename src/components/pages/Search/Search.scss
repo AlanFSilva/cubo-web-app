@@ -31,4 +31,9 @@
         }
     }
 
+    @media (max-width : 700px) {
+        width: 91vw;
+        box-sizing: content-box;
+        margin-left: 30px;
+	}
 }
